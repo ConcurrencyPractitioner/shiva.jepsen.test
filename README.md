@@ -1,23 +1,15 @@
-# shiva jepsen test
+# Shiva: Background
 
-A Clojure library designed to ... well, that part is up to you.
+Shiva is a distributed database which relies on the RAFT consensus algorithm to guarantee safe reads and rights to it stores and tables. We wish to test for its behavior under failure and wish to ensure that it is proof from most standard error such as node failures or loss of data.
 
-## Usage
+# Shiva Jepsen Test
 
-FIXME
+A Jepsen test written in Clojure to test the guarantees of the Shiva Distributed Database (property of Transwarp). 
 
-## License
+# Usage
 
-Copyright © 2019 FIXME
+This is used to confirm that the RAFT groups for Shiva Distributed Database upholds its guarantees. Faults are injected into the base, such as simulated crashes and disconnects, to gage how well the RAFT groups function under failure. 
 
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
+# About
 
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
-# shiva.jepsen.test
+This test has been used to uncover several mistakes within Transwarp's implementation of RAFT, particularly mismatching pieces of data in RPCs (messages that is sent in between RAFT nodes and clients for a variety of purposes which include message updates as well as rebalances and node migration). This test has also uncovered weaknesses in Shiva's design which needs to be fixed, particularly its read operations which when the RAFT group is in unstable condition, would return inconsistent results, breaking the consistency guarantee.
