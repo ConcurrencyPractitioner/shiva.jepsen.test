@@ -1,3 +1,6 @@
+For detailed introduction of test, please look here:
+https://github.com/ConcurrencyPractitioner/shiva.jepsen.test/blob/master/doc/intro.md
+
 # Shiva: Background
 
 Shiva is a distributed database which relies on the RAFT consensus algorithm to guarantee safe reads and rights to it stores and tables. We wish to test for its behavior under failure and wish to ensure that it is proof from most standard error such as node failures or loss of data.
